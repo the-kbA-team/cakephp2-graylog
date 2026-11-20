@@ -12,6 +12,5 @@ composer.lock   export-ignore
 clover.xml      export-ignore
 phpunit.xml     export-ignore
 phpstan.neon    export-ignore
-phpstan-rename.neon export-ignore
 README.*        export-ignore
 stubs/          export-ignore
