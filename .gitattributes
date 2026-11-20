@@ -4,9 +4,9 @@
 tests/          export-ignore
 vendor/         export-ignore
 .travis.yml     export-ignore
-composer.*      export-ignore
+composer.lock   export-ignore
 phpunit.xml     export-ignore
 phpstan.neon    export-ignore
+phpstan-rename.neon export-ignore
 README.*        export-ignore
-LICENSE         export-ignore
 stubs/          export-ignore
