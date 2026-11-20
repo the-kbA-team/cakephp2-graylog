@@ -1,0 +1,8 @@
+includes:
+  - phpstan.neon
+
+parameters:
+  treatPhpDocTypesAsCertain: false
+  ignoreErrors:
+    - message: '#Binary operation "\." between .+ and mixed results in an error\.#'
+      path: Lib/Log/Engine/GraylogLog.php

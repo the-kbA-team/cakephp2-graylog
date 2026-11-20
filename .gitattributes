@@ -7,5 +7,6 @@ vendor/         export-ignore
 composer.lock   export-ignore
 phpunit.xml     export-ignore
 phpstan.neon    export-ignore
+phpstan-rename.neon export-ignore
 README.*        export-ignore
 stubs/          export-ignore
