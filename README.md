@@ -85,7 +85,8 @@ make check PHP_VERSION=8.5 DEPENDENCIES_LOWEST=1
 PHPStan, then audits the same dependency snapshot. `test` and `check` write
 `clover.xml`. `install` and `audit` resolve their own snapshots.
 These commands refuse to overwrite an existing `composer.lock` and remove
-their temporary lockfile. `make clean` removes generated `vendor/`, coverage and
+their temporary lockfile. QA commands require `flock` and reject concurrent
+runs in the same checkout. `make clean` removes generated `vendor/`, coverage and
 PHPUnit cache files. Set `COMPOSER_IMAGE` to select the Composer image, and set proxy
 variables and `CA_CERT_FILE` if your network requires them.
 

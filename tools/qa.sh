@@ -6,10 +6,23 @@ php_version=${PHP_VERSION:-8.1}
 lowest=${DEPENDENCIES_LOWEST:-0}
 
 case "$task" in
-    install|check|audit|validate|lint|test|analyze) ;;
+    install|check|audit|validate|lint|test|analyze|clean) ;;
     *) echo "Unknown QA task: $task" >&2; exit 1 ;;
 esac
 case "$lowest" in 0|1) ;; *) echo "DEPENDENCIES_LOWEST must be 0 or 1." >&2; exit 1 ;; esac
+
+if [ "${QA_LOCK_HELD:-0}" != 1 ]; then
+    exec 9< composer.json
+    if ! flock -n 9; then
+        echo "Another QA command is using this checkout." >&2
+        exit 1
+    fi
+fi
+
+if [ "$task" = clean ]; then
+    rm -rf vendor .phpunit.result.cache clover.xml
+    exit
+fi
 
 if [ "${QA_NATIVE:-0}" != 1 ]; then
     case "$task" in
@@ -62,7 +75,7 @@ if [ "${QA_NATIVE:-0}" != 1 ]; then
         --env HTTP_PROXY --env HTTPS_PROXY --env NO_PROXY \
         --env http_proxy --env https_proxy --env no_proxy \
         --env PHP_VERSION="$php_version" --env DEPENDENCIES_LOWEST="$lowest" \
-        --env QA_NATIVE=1 --env HOST_UID="$(id -u)" --env HOST_GID="$(id -g)"
+        --env QA_NATIVE=1 --env QA_LOCK_HELD=1 --env HOST_UID="$(id -u)" --env HOST_GID="$(id -g)"
     if [ -n "${CA_CERT_FILE:-}" ]; then
         [ -f "$CA_CERT_FILE" ] || { echo "CA_CERT_FILE is not a file." >&2; exit 1; }
         set -- "$@" --volume "$CA_CERT_FILE:/usr/local/share/ca-certificates/extra-ca.crt:ro"
@@ -131,13 +144,13 @@ case "$task" in
     test) test_with_coverage ;;
     analyze) php vendor/bin/phpstan analyse --no-progress ;;
     install) resolve ;;
-    audit) resolve; composer audit ;;
+    audit) resolve; composer audit --locked ;;
     check)
         resolve
         lint
         test_with_coverage
         php vendor/bin/phpstan analyse --no-progress
-        composer audit
+        composer audit --locked
         ;;
     *) echo "Unknown QA task: $task" >&2; exit 1 ;;
 esac

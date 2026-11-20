@@ -23,7 +23,7 @@ check-php-version:
 		*) echo "PHP_VERSION must be a supported PHP 8 minor version (8.1 or later)." >&2; exit 1 ;; esac
 
 clean:
-	rm -rf vendor .phpunit.result.cache clover.xml
+	@sh tools/qa.sh clean
 
 install lint test analyze audit validate check: check-php-version
 	@sh tools/qa.sh $@
