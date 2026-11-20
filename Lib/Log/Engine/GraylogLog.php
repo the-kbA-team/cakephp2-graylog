@@ -19,7 +19,7 @@ App::uses('Router', 'Routing');
  * Class GraylogLog
  * @author  Gregor J.
  * @license MIT
- * @link    https://github.com/the-kbA-team/cakephp-graylog.git Repository
+ * @link    https://github.com/the-kbA-team/cakephp2-graylog Repository
  */
 class GraylogLog extends BaseLog
 {

@@ -1,6 +1,6 @@
 {
-  "name": "kba-team/cakephp-graylog",
-  "description": "Graylog engine for CakePHP",
+  "name": "kba-team/cakephp2-graylog",
+  "description": "Graylog engine for CakePHP 2",
   "type": "cakephp-plugin",
   "license": "MIT",
   "minimum-stability": "stable",
@@ -12,6 +12,9 @@
     "composer/installers": "^1.9",
     "kba-team/php-backtrace": "^1.0",
     "kba-team/graylog-utilities": "^2.0"
+  },
+  "conflict": {
+    "kba-team/cakephp-graylog": "*"
   },
   "extra": {
     "installer-name": "Graylog"

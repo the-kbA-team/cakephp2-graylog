@@ -1,18 +1,19 @@
-# CakePHP Graylog
+# CakePHP 2 Graylog
 
 [![License: MIT][license-mit]](LICENSE)
-[![Packagist Version][packagist-badge]][packagist]
-[![Build Status][build-status-cake2]][travis-ci]
-[![Maintainability][maintainability-badge]][maintainability]
-[![Test Coverage][coverage-badge]][coverage]
 
 Graylog log engine for CakePHP 2.x
 
 ## Usage
 
 ```bash
-composer require kba-team/cakephp-graylog
+composer require kba-team/cakephp2-graylog
 ```
+
+The new package must be published to Packagist before this command works. To
+migrate from `kba-team/cakephp-graylog`, remove the old dependency and require
+this package in the same Composer update. Both packages install the `Graylog`
+plugin and cannot be installed together. The plugin configuration is unchanged.
 
 ```php
 <?php
@@ -71,11 +72,3 @@ Possible configuration parameters are:
 * About [Graylog Extended Log Format (GELF)](https://docs.graylog.org/en/3.1/pages/gelf.html)
 
 [license-mit]: https://img.shields.io/badge/license-MIT-blue.svg
-[packagist-badge]: https://img.shields.io/packagist/v/kba-team/cakephp-graylog
-[packagist]: https://packagist.org/packages/kba-team/cakephp-graylog
-[travis-ci]: https://travis-ci.org/the-kbA-team/cakephp-graylog
-[build-status-cake2]: https://api.travis-ci.org/the-kbA-team/cakephp-graylog.svg?branch=cake2
-[maintainability-badge]: https://api.codeclimate.com/v1/badges/04abc6d1562d5f628f8a/maintainability
-[maintainability]: https://codeclimate.com/github/the-kbA-team/cakephp-graylog/maintainability
-[coverage-badge]: https://api.codeclimate.com/v1/badges/04abc6d1562d5f628f8a/test_coverage
-[coverage]: https://codeclimate.com/github/the-kbA-team/cakephp-graylog/test_coverage
